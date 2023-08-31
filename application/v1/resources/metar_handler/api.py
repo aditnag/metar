@@ -1,6 +1,6 @@
 import re, time
 import requests
-from flask import request
+from flask import request, jsonify
 import redis
 import json
 from application.v1.resources.Resources import (
@@ -42,26 +42,28 @@ def parse_metar_data(data):
                 wind_direction = lines[i]
                 if len(lines[i]) == 7:
                     direction = lines[i][:3]
-                    velocity = lines[i][3:]
+                    velocity = lines[i][3:-2]
                     break
                 elif len(lines[i]) == 10:
                     direction = lines[i][:3]
-                    velocity = lines[i][-4:]
+                    velocity = lines[i][-4:-2]
                     gust = lines[i][3:6]
                     break
 
-        TEMP_RE = re.compile(
-            r"""^(?P<temp>([M\-])?\d{1,2}|//|XX|MM)/
-            (?P<dewpt>([M\-])?\d{1,2}|//|XX|MM)?\s+""",
-            re.VERBOSE,
-        )
+        # M01 / M05
         temperature = ""
+        dew = ""
         for item in lines:
-            match = TEMP_RE.match(item)
-            if match:
-                temperature = item
-                break
-        print(temperature)
+            if item[0] == "M" and item[4] == "M":
+                temperature = "-".join(item[1:3])
+                dew = "-"+item[-2:]
+            elif item[0] == "P" and item[4] == "P":
+                temperature = "-".join(+item[1:3])
+                dew = item[-2:]
+            else:
+                temperature = "Not Updated"
+                dew = "Not Update"
+
         return {
             "station": station,
             "last_observation": f"{observation_date} at {time} GMT",
@@ -104,6 +106,7 @@ class WeatherInfo(API_Resource):
             }
             end = time.time()
             print(f"time taken = {end - start}")
-            return json.dumps({"data": response})
+            # return json.dumps({"data": response})
+            return json.loads(json.dumps({"data": response}))
         except Exception as e:
             return json.dumps({"error": str(e)})
