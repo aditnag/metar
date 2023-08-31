@@ -6,8 +6,11 @@ Project Set Up:
 3. Use Postman for Testing the endpoint
 4. wsgi.py is the main file
 
-Running the app: flask run
-
+**Running the app**: Open the project in you fav ide. 
+Run the below command in the metar directory in the terminal:
+=========
+flask run
+=========
 eg: 
 get request = http://localhost:8080/metar/info?scode=CYXQ.TXT&nocache=1
 
