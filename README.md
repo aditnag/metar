@@ -20,3 +20,16 @@ response:
         "wind": "090 at 04 knots"
     }
 }
+
+If the value is not present in https://tgftp.nws.noaa.gov/data/observations/metar/stations/DNKN.TXT
+the response will be **Not Updated**
+
+eg: 
+{
+    "data": {
+        "station": "DNKN",
+        "last_observation": "2023/08/31 at 14:00 GMT",
+        "temperature": "Not Updated C",
+        "wind": "240 at 07 knots"
+    }
+}

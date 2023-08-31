@@ -49,6 +49,9 @@ def parse_metar_data(data):
                     velocity = lines[i][-4:-2]
                     gust = lines[i][3:6]
                     break
+                else:
+                    direction = "Not Updated"
+                    velocity = "Not Updated"
 
         # M01 / M05
         temperature = ""
@@ -57,9 +60,11 @@ def parse_metar_data(data):
             if item[0] == "M" and item[4] == "M":
                 temperature = "-".join(item[1:3])
                 dew = "-"+item[-2:]
+                break
             elif item[0] == "P" and item[4] == "P":
                 temperature = "-".join(+item[1:3])
                 dew = item[-2:]
+                break
             else:
                 temperature = "Not Updated"
                 dew = "Not Update"
