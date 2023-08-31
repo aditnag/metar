@@ -99,7 +99,7 @@ class WeatherInfo(API_Resource):
 
             parsed_data = parse_metar_data(data)
             response = {
-                "station": station_code,
+                "station": parsed_data["station"],
                 "last_observation": parsed_data["last_observation"],
                 "temperature": parsed_data["temperature"] + " C",
                 "wind": f"{parsed_data['wind_direction']} at {parsed_data['wind_speed']} knots",
