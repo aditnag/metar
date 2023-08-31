@@ -1,9 +1,9 @@
 # metar
 Project Set Up:
 
-1. Install the packages in requirements.txt: 
+1. Set up the environment
+2. Install the packages in requirements.txt: 
 pip install -r requirements.txt 
-2. Set up the environment: 
 3. Python Version: 3.11
 4. Use Postman for Testing the endpoint
 5. wsgi.py is the main file
