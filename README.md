@@ -10,9 +10,9 @@ pip install -r requirements.txt
 
 **Running the app**: Open the project in you fav ide. 
 Run the below command in the metar directory in the terminal:
-=========
-flask run
-=========
+===========================
+flask run or python wsgi.py
+===========================
 eg: 
 get request = http://localhost:8080/metar/info?scode=CYXQ.TXT&nocache=1
 
