@@ -8,7 +8,7 @@ pip install -r requirements.txt
 4. Use Postman for Testing the endpoint
 5. wsgi.py is the main file
 
-**Running the app**: Open the project in you fav ide. 
+Running the app: Open the project in you fav ide. 
 Run the below command in the metar directory in the terminal:
 ===========================
 flask run or python wsgi.py
